@@ -1,0 +1,7 @@
+build/
+venv/
+*.out
+*.vcd
+
+vunit_out/
+sim_build/

@@ -1,0 +1,2 @@
+teroshdl==3.0.0
+yowasp-yosys==0.34.0.0.post591

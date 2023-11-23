@@ -1,0 +1,59 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+  "name": "Stack Arch Development Environment",
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  // "features": {},
+  // Configure tool-specific properties.
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      "settings": {
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 1500,
+        "files.insertFinalNewline": true,
+        "workbench.iconTheme": "material-icon-theme",
+        "verilog.linting.linter": "iverilog",
+        "verilog.gtkwaveWatchGlob": "**/*.vcd",
+        "verilog.icarusPersistentBuild": true,
+        "[verilog]": {
+          "editor.defaultFormatter": "teros-technology.teroshdl"
+        },
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true
+      },
+      "extensions": [
+        "raits.verilog-extensions",
+        "PKief.material-icon-theme",
+        "ms-azuretools.vscode-docker",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [3000],
+  // Use 'portsAttributes' to set default properties for specific forwarded ports.
+  // More info: https://containers.dev/implementors/json_reference/#port-attributes
+  "portsAttributes": {
+    "3000": {
+      "label": "Application",
+      "onAutoForward": "notify"
+    }
+  },
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "pip install -r requirements.txt",
+
+  "postStartCommand": {
+    "python": "python --version",
+    "pip": "pip --version",
+    "iverilog": "iverilog -V 2>&1 | sed -n '1p'",
+    "yosys": "yosys -V"
+  },
+
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  "remoteUser": "root"
+}
